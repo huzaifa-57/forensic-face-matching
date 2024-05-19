@@ -1,0 +1,15 @@
+torch
+opencv-python
+torchvision
+fpdf
+pillow
+passporteye
+webbrowser
+pytesseract
+cmake
+pyqt6
+filetype
+dlib
+pandas
+numpy
+sqlite3
