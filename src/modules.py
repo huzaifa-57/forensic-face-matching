@@ -1,25 +1,27 @@
+import cv2
+import dlib
+import filetype
+import numpy as np
+import os
+import pandas as pd
+import sqlite3
+import sys
+import time
+import torch
+import webbrowser
+from PIL import Image
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import QFileDialog, QMessageBox, QStyle
-from passporteye import read_mrz
-import sqlite3
-import os
-import sys
-import filetype
-import cv2
-import dlib
-import numpy as np
-import pandas as pd
-import webbrowser
+from mtlface.face_aligment import face_process
 from numpy import dot
 from numpy.linalg import norm
-from report_generator import generate_report
-import time
-import torch
-from PIL import Image
+from passporteye import read_mrz
 from torchvision import transforms
-from mtlface.face_aligment import face_process
+
 from layout import interface
+from report_generator import generate_report
+
 torch.autograd.set_grad_enabled(False)
 
 class Modules(interface.Ui_MainWindow):
@@ -551,8 +553,8 @@ class Modules(interface.Ui_MainWindow):
             images.append(input_img)
                 
         images = torch.cat(images, dim=0)
-
-        x_vec = mtlface.encode((images))
+        with torch.no_grad():
+            x_vec = mtlface.encode((images))
         results = dot(x_vec[0], x_vec[1]) / (norm(x_vec[0]) * norm(x_vec[1]))
 
         return results

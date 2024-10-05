@@ -1,22 +1,24 @@
+import cv2
+import dlib
+import filetype
+import numpy as np
+import os
+import pandas as pd
+import sqlite3
+import sys
+import time
+import torch
+import webbrowser
+from PIL import Image
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtWidgets import QFileDialog, QMessageBox, QStyle
-from passporteye import read_mrz
-import sqlite3
-import os
-import sys
-import filetype
-import cv2
-import dlib
-import numpy as np
-import pandas as pd
-import webbrowser
 from numpy import dot
 from numpy.linalg import norm
+from passporteye import read_mrz
+
 from report_generator import generate_report
-import time
-import torch
-from PIL import Image
+
 torch.autograd.set_grad_enabled(False)
 from torchvision import transforms
 from mtlface.face_aligment import face_process
